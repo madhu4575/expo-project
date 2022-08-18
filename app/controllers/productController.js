@@ -14,7 +14,7 @@ productController.list = (req, res) => {
 
 productController.show = (req, res) => {
     const id = req.params.id
-    Product.findOne({ _id: id, user: req.user._id,business:req.params.businessId })
+    Product.findOne({ _id: id, user: req.user._id})
         .then((product) => {
             if (product) {
                 res.json(product)
@@ -31,7 +31,6 @@ productController.create = (req,res) => {
     const body = req.body
     const product = new Product(body)
     product.user = req.user._id
-    product.business = req.params.businessId
     product.save()
         .then((product) => {res.json(product)})
         .catch((err) => {res.json(err.message)})
@@ -39,6 +38,7 @@ productController.create = (req,res) => {
 
 productController.update = (req,res) => {
     const body = req.body
+    const  id  = req.params.id
     Product.findOneAndUpdate({ _id: id, user: req.user._id}, body, { new: true, runValidators: true })
         .then((product) => {
             res.json(product)

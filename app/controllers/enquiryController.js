@@ -3,8 +3,7 @@ const Enquiry = require('../models/enquiry')
 const enquiryController = {}
 
 enquiryController.list = (req, res) => {
-    const id = req.parmas.porductId
-    Enquiry.find({ user: req.user._id,business:req.params.businessId,product:id})
+    Enquiry.find({ user: req.user._id})
         .then((enquiry) => {
             res.json(enquiry)
         })

@@ -40,6 +40,7 @@ businessController.create = (req,res) => {
 
 businessController.update = (req,res) => {
     const body = req.body
+    const id = req.params.id
     Business.findOneAndUpdate({ _id: id, user: req.user._id }, body, { new: true, runValidators: true })
         .then((business) => {
             res.json(business)
